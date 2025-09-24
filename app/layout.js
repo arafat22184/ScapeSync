@@ -5,6 +5,7 @@ const publicSans = Public_Sans({
   variable: "--font-public-sans",
   subsets: ["latin"],
   display: "swap",
+  weight: "400",
 });
 
 export const metadata = {
