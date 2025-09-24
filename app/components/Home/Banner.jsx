@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Banner() {
   return (
-    <div className="max-w-11/12 lg:max-w-10/12 mx-auto flex flex-col-reverse lg:flex-row justify-between items-center">
+    <section className="max-w-11/12 lg:max-w-7xl mx-auto flex flex-col-reverse lg:flex-row justify-between items-center">
       {/* Flare effect */}
       <div className="absolute inset-0 top-10 -left-130 pointer-events-none">
         <div className="absolute w-[600px] h-[600px] bg-[#9DFF99]/40 blur-[90px] rounded-full"></div>
@@ -90,6 +90,6 @@ export default function Banner() {
         {/* Smooth transition fade at bottom */}
         <div className="absolute bottom-0 left-0 right-0 h-36 bg-gradient-to-t from-white to-transparent z-20"></div>
       </div>
-    </div>
+    </section>
   );
 }
