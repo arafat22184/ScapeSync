@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Footer() {
   const socialIcons = [
@@ -27,14 +28,16 @@ export default function Footer() {
     <footer className="bg-[#0F3B34] px-4 xl:px-0 relative">
       <div className="max-w-7xl mx-auto pt-14 pb-6 lg:pt-[101px] lg:pb-[34px] relative z-50">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5 lg:gap-[74px]">
-          <Image
-            src={
-              "https://res.cloudinary.com/ddckuxsjx/image/upload/v1758740455/ScapeSync-Logo_pncngb.png"
-            }
-            width={207}
-            height={76}
-            alt="ScapeSync Logo"
-          ></Image>
+          <Link href={"/"}>
+            <Image
+              src={
+                "https://res.cloudinary.com/ddckuxsjx/image/upload/v1758740455/ScapeSync-Logo_pncngb.png"
+              }
+              width={207}
+              height={76}
+              alt="ScapeSync Logo"
+            ></Image>
+          </Link>
 
           <h6 className="font-medium text-[#CFD8D6] flex-1">
             Your all-in-one platform for job scheduling, employee management,
