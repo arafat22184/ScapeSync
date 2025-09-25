@@ -20,7 +20,7 @@ export default function RootLayout({ children }) {
     <html lang="en" className={publicSans.variable}>
       <body className="antialiased">
         <Navbar></Navbar>
-        <main className="min-h-[calc(100vh-80px)] mx-auto min-w-7xl flex justify-center items-center">
+        <main className="min-h-[calc(100vh-80px)] mx-auto max-w-11/12 py-6 lg:py-0 lg:max-w-7xl flex justify-center items-center">
           {children}
         </main>
       </body>
