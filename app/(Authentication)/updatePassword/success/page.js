@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function RegistrationSuccess() {
   return (
-    <div>
+    <div className="max-w-[480px] mx-auto">
       <div className="flex justify-center items-center">
         <Image
           src={
@@ -15,16 +15,17 @@ export default function RegistrationSuccess() {
         ></Image>
       </div>
       <h1 className="text-[#212B36] text-2xl font-bold mt-9 mb-4">
-        Account Created Successfully!
+        Password Changed Successfully!
       </h1>
       <p className="text-[#637381]">
-        Your account is set up! Just verify your email to get started.
+        Your password has been reset successfully. Please log in to your account
+        using your new password.
       </p>
       <Link
-        href={"/"}
+        href={"/login"}
         className="block text-center mt-10 w-full py-3 bg-[#49AE44] rounded-lg text-white font-bold cursor-pointer hover:bg-[#3e8e3a] transition-colors duration-200"
       >
-        Go to Home
+        Go to Login
       </Link>
     </div>
   );
