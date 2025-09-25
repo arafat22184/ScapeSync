@@ -13,7 +13,6 @@ export default function VerificationPage() {
   const inputRefs = useRef([]);
   const router = useRouter();
 
-  // Use useEffect to access searchParams safely
   useEffect(() => {
     const emailParam = searchParams.get("email");
     if (emailParam) {
@@ -22,7 +21,9 @@ export default function VerificationPage() {
   }, [searchParams]);
 
   const handleChange = (index, value) => {
-    if (value && !/^\d$/.test(value)) return;
+    if (value && !/^\d$/.test(value)) {
+      return;
+    }
 
     const newCodes = [...codes];
     newCodes[index] = value;
@@ -200,7 +201,7 @@ export default function VerificationPage() {
         <button
           onClick={handleVerify}
           disabled={!allCodesFilled || loading}
-          className="w-full py-3 bg-[#49AE44] text-white font-bold rounded-lg hover:bg-[#3e8e3a] transition-colors duration-200 mb-4 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-[#49AE44] flex items-center justify-center gap-2"
+          className="w-full py-3 bg-[#49AE44] text-white font-bold rounded-lg hover:bg-[#3e8e3a] transition-colors duration-200 mb-4 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer disabled:hover:bg-[#49AE44] flex items-center justify-center gap-2"
         >
           {loading ? (
             <>
@@ -217,15 +218,10 @@ export default function VerificationPage() {
           <button
             onClick={handleResendCode}
             disabled={resendLoading || loading}
-            className="text-[#49AE44] font-semibold hover:underline disabled:opacity-50 disabled:cursor-not-allowed"
+            className="text-[#49AE44] font-semibold hover:underline disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
           >
             {resendLoading ? "Sending..." : "Resend code"}
           </button>
-        </p>
-
-        {/* Helper text */}
-        <p className="text-center text-xs text-gray-500 mt-4">
-          Enter the 6-digit code sent to your email
         </p>
       </div>
     </>

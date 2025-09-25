@@ -1,4 +1,5 @@
 "use client";
+import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -8,7 +9,8 @@ import { toast } from "sonner";
 
 export default function RegisterForm() {
   const [showPass, setShowPass] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [formLoading, setFormLoading] = useState(false);
+  const [googleLoading, setGoogleLoading] = useState(false);
   const router = useRouter();
 
   const handlePassShowToogle = (e) => {
@@ -18,7 +20,7 @@ export default function RegisterForm() {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    setLoading(true);
+    setFormLoading(true);
 
     const formdata = new FormData(e.currentTarget);
 
@@ -33,19 +35,19 @@ export default function RegisterForm() {
     // Basic validation
     if (!firstName || !lastName || !email || !password || !confirmPassword) {
       toast.error("Please fill in all fields");
-      setLoading(false);
+      setFormLoading(false);
       return;
     }
 
     if (password !== confirmPassword) {
       toast.error("Passwords do not match");
-      setLoading(false);
+      setFormLoading(false);
       return;
     }
 
     if (!terms) {
       toast.error("Please agree to the Terms of Service and Privacy Policy");
-      setLoading(false);
+      setFormLoading(false);
       return;
     }
 
@@ -92,14 +94,27 @@ export default function RegisterForm() {
       console.error("Registration error:", error);
       toast.error("Network error. Please try again.");
     } finally {
-      setLoading(false);
+      setFormLoading(false);
     }
   };
 
-  const handleGoogleRegister = (e) => {
-    e.preventDefault();
-    toast.info("Google registration coming soon!");
+  const handleGoogleRegister = async () => {
+    try {
+      setGoogleLoading(true);
+      toast.loading("Redirecting to Google...");
+
+      await signIn("google", {
+        callbackUrl: "/",
+        redirect: true,
+      });
+    } catch (error) {
+      console.error("Google sign-in error:", error);
+      toast.error("Failed to initiate Google sign-in");
+      setGoogleLoading(false);
+    }
   };
+
+  const isLoading = formLoading || googleLoading;
 
   return (
     <div>
@@ -116,7 +131,7 @@ export default function RegisterForm() {
             <input
               type="text"
               name="firstName"
-              disabled={loading}
+              disabled={isLoading}
               suppressHydrationWarning
               className="outline-1 outline-[#919EAB]/32 w-full h-14 rounded-lg pl-4 focus:outline-[#49AE44] hover:outline-[#49AE44]/50 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
             />
@@ -125,7 +140,7 @@ export default function RegisterForm() {
           <input
             type="text"
             name="lastName"
-            disabled={loading}
+            disabled={isLoading}
             suppressHydrationWarning
             className="flex-1 outline-1 outline-[#919EAB]/32 w-full h-14 rounded-lg pl-4 focus:outline-[#49AE44] hover:outline-[#49AE44]/50 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
             placeholder="Last name"
@@ -136,7 +151,7 @@ export default function RegisterForm() {
         <input
           type="email"
           name="email"
-          disabled={loading}
+          disabled={isLoading}
           suppressHydrationWarning
           className="flex-1 outline-1 outline-[#919EAB]/32 w-full min-h-14 rounded-lg pl-4 focus:outline-[#49AE44] hover:outline-[#49AE44]/50 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
           placeholder="Email address"
@@ -149,13 +164,13 @@ export default function RegisterForm() {
             name="password"
             placeholder="Password"
             autoComplete="true"
-            disabled={loading}
+            disabled={isLoading}
             suppressHydrationWarning
             className="outline-1 outline-[#919EAB]/32 w-full h-14 rounded-lg pl-4 focus:outline-[#49AE44] hover:outline-[#49AE44]/50 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
           />
           <button
             onClick={handlePassShowToogle}
-            disabled={loading}
+            disabled={isLoading}
             className="absolute right-4 top-4 text-[#637381] cursor-pointer hover:text-[#49AE44] transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {showPass ? <IoIosEye size={24} /> : <IoMdEyeOff size={24} />}
@@ -169,13 +184,13 @@ export default function RegisterForm() {
             name="confirmPassword"
             placeholder="Confirm Password"
             autoComplete="true"
-            disabled={loading}
+            disabled={isLoading}
             suppressHydrationWarning
             className="outline-1 outline-[#919EAB]/32 w-full h-14 rounded-lg pl-4 focus:outline-[#49AE44] hover:outline-[#49AE44]/50 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
           />
           <button
             onClick={handlePassShowToogle}
-            disabled={loading}
+            disabled={isLoading}
             className="absolute right-4 top-4 text-[#637381] cursor-pointer hover:text-[#49AE44] transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {showPass ? <IoIosEye size={24} /> : <IoMdEyeOff size={24} />}
@@ -190,7 +205,7 @@ export default function RegisterForm() {
                 type="checkbox"
                 name="terms"
                 defaultChecked
-                disabled={loading}
+                disabled={isLoading}
                 className="peer appearance-none w-5 h-5 border-2 border-[#49AE44] rounded-md checked:bg-[#49AE44] checked:border-[#49AE44] transition-colors cursor-pointer hover:border-[#49AE44]/80 hover:checked:bg-[#49AE44]/90 disabled:opacity-50 disabled:cursor-not-allowed"
               />
               {/* Tick mark */}
@@ -216,10 +231,10 @@ export default function RegisterForm() {
         {/* Submit Button */}
         <button
           type="submit"
-          disabled={loading}
+          disabled={isLoading}
           className="w-full py-3 bg-[#49AE44] rounded-lg text-white font-bold cursor-pointer hover:bg-[#3e8e3a] transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-[#49AE44]"
         >
-          {loading ? "Creating Account..." : "Create Account"}
+          {formLoading ? "Creating Account..." : "Create Account"}
         </button>
       </form>
 
@@ -232,19 +247,19 @@ export default function RegisterForm() {
 
       <button
         onClick={handleGoogleRegister}
-        disabled={loading}
+        disabled={isLoading}
         className="w-full border border-[#919EAB]/32 py-3 text-[#637381] flex justify-center items-center gap-4 rounded-lg cursor-pointer hover:border-[#49AE44]/50 hover:text-[#49AE44] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
       >
         <FcGoogle size={24} />
-        Continue with Google
+        {googleLoading ? "Redirecting..." : "Continue with Google"}
       </button>
 
       <p className="mt-8 text-sm text-center">
         Already have an account?{" "}
         <Link
-          href={loading ? "#" : "/login"}
+          href={isLoading ? "#" : "/login"}
           className={`text-[#49AE44] font-semibold text-sm hover:text-[#3e8e3a] transition-colors duration-200 ${
-            loading ? "pointer-events-none opacity-50" : ""
+            isLoading ? "pointer-events-none opacity-50" : ""
           }`}
         >
           Login
