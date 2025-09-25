@@ -28,7 +28,7 @@ export default function Features() {
     },
   ];
   return (
-    <section className="max-w-11/12 lg:max-w-7xl mx-auto grid grid-cols-4 gap-9 mt-20 mb-42.5">
+    <section className="max-w-11/12 lg:max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-9 mt-20 mb-42.5">
       {data.map((d, i) => (
         <Feature key={i} d={d}></Feature>
       ))}
