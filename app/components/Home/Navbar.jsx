@@ -12,9 +12,12 @@ export default function Navbar() {
           alt="ScapeSync Logo"
         />
       </Link>
-      <button className="bg-[#3BA334] hover:bg-[#3ba334ea] font-bold text-white rounded-lg px-6.5 py-2.5 cursor-pointer">
+      <Link
+        href={"/login"}
+        className="bg-[#3BA334] hover:bg-[#3ba334ea] font-bold text-white rounded-lg px-6.5 py-2.5 cursor-pointer"
+      >
         Get Started
-      </button>
+      </Link>
     </nav>
   );
 }
