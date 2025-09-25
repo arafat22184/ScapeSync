@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useState, useRef } from "react";
 
-export default function VerificationPage() {
+export default function ResetPassVerifyForm() {
   const [codes, setCodes] = useState(["", "", "", "", "", ""]);
   const inputRefs = useRef([]);
 
