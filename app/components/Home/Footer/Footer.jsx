@@ -45,31 +45,43 @@ export default function Footer() {
           {/* App Download Buttons */}
           <div className="flex items-center gap-4 text-white xl:ml-[53px]">
             {/* Apple Store */}
-            <div className="rounded-md border border-[#347C30] px-[14px] py-2.5 flex items-center gap-3 cursor-pointer">
-              <Image
-                src="https://res.cloudinary.com/ddckuxsjx/image/upload/v1758749443/Foot-Apple_cig1ss.png"
-                width={22}
-                height={27}
-                alt="Apple Store Logo"
-              ></Image>
-              <div>
-                <p className="text-[9px]">Download on the</p>
-                <p className="text-lg font-semibold">App Store</p>
+            <a
+              href="https://www.apple.com/app-store/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div className="rounded-md border border-[#347C30] px-[14px] py-2.5 flex items-center gap-3 cursor-pointer transition-all duration-300 hover:bg-[#174e44] hover:scale-105 hover:shadow-lg">
+                <Image
+                  src="https://res.cloudinary.com/ddckuxsjx/image/upload/v1758749443/Foot-Apple_cig1ss.png"
+                  width={22}
+                  height={27}
+                  alt="Apple Store Logo"
+                ></Image>
+                <div>
+                  <p className="text-[9px]">Download on the</p>
+                  <p className="text-lg font-semibold">App Store</p>
+                </div>
               </div>
-            </div>
+            </a>
             {/* Play Store */}
-            <div className="rounded-md border border-[#347C30] px-[14px] py-2.5 flex items-center gap-3 cursor-pointer">
-              <Image
-                src="https://res.cloudinary.com/ddckuxsjx/image/upload/v1758749443/Foot-PlayStore_g4a7pb.png"
-                width={22}
-                height={27}
-                alt="Apple Store Logo"
-              ></Image>
-              <div>
-                <p className="text-[9px]">Download on the</p>
-                <p className="text-lg font-semibold">Google Play</p>
+            <a
+              href="https://play.google.com/store"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div className="rounded-md border border-[#347C30] px-[14px] py-2.5 flex items-center gap-3 cursor-pointer transition-all duration-300 hover:bg-[#174e44] hover:scale-105 hover:shadow-lg">
+                <Image
+                  src="https://res.cloudinary.com/ddckuxsjx/image/upload/v1758749443/Foot-PlayStore_g4a7pb.png"
+                  width={22}
+                  height={27}
+                  alt="Apple Store Logo"
+                ></Image>
+                <div>
+                  <p className="text-[9px]">Download on the</p>
+                  <p className="text-lg font-semibold">Google Play</p>
+                </div>
               </div>
-            </div>
+            </a>
           </div>
         </div>
         <div className="flex items-center mt-[91px] gap-8">
@@ -79,6 +91,7 @@ export default function Footer() {
               key={social.name}
               target="_blank"
               rel="noopener noreferrer"
+              className="transition-all duration-300 hover:scale-125 hover:brightness-110"
             >
               <Image
                 src={social.img}

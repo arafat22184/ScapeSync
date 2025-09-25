@@ -1,3 +1,6 @@
+"use client";
+
+import { motion } from "framer-motion";
 import Feature from "./Feature";
 
 export default function Features() {
@@ -27,11 +30,42 @@ export default function Features() {
         "Enterprise-grade security with 99.9% uptime guarantee and data protection.",
     },
   ];
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut",
+      },
+    },
+  };
+
   return (
-    <section className="grid grid-cols-2 lg:grid-cols-4 gap-9 mt-20 mb-42.5">
+    <motion.section
+      className="grid grid-cols-2 lg:grid-cols-4 gap-9 mt-20 mb-42.5"
+      variants={containerVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-50px" }}
+    >
       {data.map((d, i) => (
-        <Feature key={i} d={d}></Feature>
+        <motion.div key={i} variants={itemVariants}>
+          <Feature d={d} />
+        </motion.div>
       ))}
-    </section>
+    </motion.section>
   );
 }
