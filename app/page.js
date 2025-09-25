@@ -1,5 +1,5 @@
 import Banner from "./components/Home/Banner";
-import FAQ from "./components/Home/FAQ";
+import FAQS from "./components/Home/FAQS/FAQS";
 import Features from "./components/Home/Features";
 import Navbar from "./components/Home/Navbar";
 import Reviews from "./components/Home/Reviews/Reviews";
@@ -16,7 +16,7 @@ export default function Home() {
       <main className="lg:px-4 xl:px-0 max-w-11/12 lg:max-w-7xl mx-auto">
         <UserFocusedFeatures></UserFocusedFeatures>
         <Reviews></Reviews>
-        <FAQ></FAQ>
+        <FAQS></FAQS>
       </main>
     </div>
   );
