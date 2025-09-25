@@ -15,7 +15,7 @@ export const metadata = {
     "Built for business owners, employees, and clients streamline job scheduling, service tracking, and team management in one powerful app.",
 };
 
-export default function RootLayout({ children }) {
+export default function AuthLayout({ children }) {
   return (
     <html lang="en" className={publicSans.variable}>
       <body className="antialiased">

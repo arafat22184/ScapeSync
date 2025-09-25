@@ -1,19 +1,109 @@
 "use client";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { IoIosEye, IoMdEyeOff } from "react-icons/io";
+import { toast } from "sonner";
 
 export default function RegisterForm() {
   const [showPass, setShowPass] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const handlePassShowToogle = (e) => {
     e.preventDefault();
     setShowPass(!showPass);
   };
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const formdata = new FormData(e.currentTarget);
+
+    // Get values from form
+    const firstName = formdata.get("firstName");
+    const lastName = formdata.get("lastName");
+    const email = formdata.get("email");
+    const password = formdata.get("password");
+    const confirmPassword = formdata.get("confirmPassword");
+    const terms = formdata.get("terms") ? "true" : "false";
+
+    // Basic validation
+    if (!firstName || !lastName || !email || !password || !confirmPassword) {
+      toast.error("Please fill in all fields");
+      setLoading(false);
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      toast.error("Passwords do not match");
+      setLoading(false);
+      return;
+    }
+
+    if (!terms) {
+      toast.error("Please agree to the Terms of Service and Privacy Policy");
+      setLoading(false);
+      return;
+    }
+
+    // Build API form data
+    const apiData = new FormData();
+    apiData.append("first_name", firstName);
+    apiData.append("last_name", lastName);
+    apiData.append("email", email);
+    apiData.append("password", password);
+    apiData.append("password_confirmation", confirmPassword);
+    apiData.append("terms", terms);
+
+    try {
+      const loadingToast = toast.loading("Creating your account...");
+
+      const res = await fetch("https://apitest.softvencefsd.xyz/api/register", {
+        method: "POST",
+        body: apiData,
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        toast.success(
+          "Registration successful! Redirecting to verification...",
+          { id: loadingToast }
+        );
+        router.push(`/register/verify?email=${encodeURIComponent(email)}`);
+      } else {
+        let errorMessage = "Registration failed";
+        if (data.errors) {
+          // Handle field-specific errors
+          const firstError = Object.values(data.errors)[0]?.[0];
+          errorMessage = firstError || errorMessage;
+        } else if (data.message) {
+          errorMessage = data.message;
+        } else if (data.email?.[0]?.includes("taken")) {
+          errorMessage = "Email address is already registered";
+        }
+
+        toast.error(errorMessage, { id: loadingToast });
+      }
+    } catch (error) {
+      console.error("Registration error:", error);
+      toast.error("Network error. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleGoogleRegister = (e) => {
+    e.preventDefault();
+    toast.info("Google registration coming soon!");
+  };
+
   return (
     <div>
-      <form className="flex flex-col gap-6 mt-12">
+      <form onSubmit={handleRegister} className="flex flex-col gap-6 mt-12">
         {/* Name */}
         <div className="flex items-center gap-4">
           <div className="relative flex-1">
@@ -24,17 +114,20 @@ export default function RegisterForm() {
               First Name
             </label>
             <input
-              type="email"
+              type="text"
               name="firstName"
+              disabled={loading}
               suppressHydrationWarning
-              className="outline-1 outline-[#919EAB]/32 w-full h-14 rounded-lg pl-4 focus:outline-[#49AE44] hover:outline-[#49AE44]/50 transition-all duration-200"
+              className="outline-1 outline-[#919EAB]/32 w-full h-14 rounded-lg pl-4 focus:outline-[#49AE44] hover:outline-[#49AE44]/50 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
             />
           </div>
+          {/* Last Name */}
           <input
             type="text"
             name="lastName"
+            disabled={loading}
             suppressHydrationWarning
-            className="flex-1 outline-1 outline-[#919EAB]/32 w-full h-14 rounded-lg pl-4 focus:outline-[#49AE44] hover:outline-[#49AE44]/50 transition-all duration-200"
+            className="flex-1 outline-1 outline-[#919EAB]/32 w-full h-14 rounded-lg pl-4 focus:outline-[#49AE44] hover:outline-[#49AE44]/50 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
             placeholder="Last name"
           />
         </div>
@@ -43,8 +136,9 @@ export default function RegisterForm() {
         <input
           type="email"
           name="email"
+          disabled={loading}
           suppressHydrationWarning
-          className="flex-1 outline-1 outline-[#919EAB]/32 w-full min-h-14 rounded-lg pl-4 focus:outline-[#49AE44] hover:outline-[#49AE44]/50 transition-all duration-200"
+          className="flex-1 outline-1 outline-[#919EAB]/32 w-full min-h-14 rounded-lg pl-4 focus:outline-[#49AE44] hover:outline-[#49AE44]/50 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
           placeholder="Email address"
         />
 
@@ -54,12 +148,15 @@ export default function RegisterForm() {
             type={showPass ? "text" : "password"}
             name="password"
             placeholder="Password"
+            autoComplete="true"
+            disabled={loading}
             suppressHydrationWarning
-            className="outline-1 outline-[#919EAB]/32 w-full h-14 rounded-lg pl-4 focus:outline-[#49AE44] hover:outline-[#49AE44]/50 transition-all duration-200"
+            className="outline-1 outline-[#919EAB]/32 w-full h-14 rounded-lg pl-4 focus:outline-[#49AE44] hover:outline-[#49AE44]/50 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
           />
           <button
             onClick={handlePassShowToogle}
-            className="absolute right-4 top-4 text-[#637381] cursor-pointer hover:text-[#49AE44] transition-colors duration-200"
+            disabled={loading}
+            className="absolute right-4 top-4 text-[#637381] cursor-pointer hover:text-[#49AE44] transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {showPass ? <IoIosEye size={24} /> : <IoMdEyeOff size={24} />}
           </button>
@@ -71,12 +168,15 @@ export default function RegisterForm() {
             type={showPass ? "text" : "password"}
             name="confirmPassword"
             placeholder="Confirm Password"
+            autoComplete="true"
+            disabled={loading}
             suppressHydrationWarning
-            className="outline-1 outline-[#919EAB]/32 w-full h-14 rounded-lg pl-4 focus:outline-[#49AE44] hover:outline-[#49AE44]/50 transition-all duration-200"
+            className="outline-1 outline-[#919EAB]/32 w-full h-14 rounded-lg pl-4 focus:outline-[#49AE44] hover:outline-[#49AE44]/50 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
           />
           <button
             onClick={handlePassShowToogle}
-            className="absolute right-4 top-4 text-[#637381] cursor-pointer hover:text-[#49AE44] transition-colors duration-200"
+            disabled={loading}
+            className="absolute right-4 top-4 text-[#637381] cursor-pointer hover:text-[#49AE44] transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {showPass ? <IoIosEye size={24} /> : <IoMdEyeOff size={24} />}
           </button>
@@ -88,9 +188,10 @@ export default function RegisterForm() {
             <label className="relative inline-flex items-center cursor-pointer">
               <input
                 type="checkbox"
-                name="rememberPass"
+                name="terms"
                 defaultChecked
-                className="peer appearance-none w-5 h-5 border-2 border-[#49AE44] rounded-md checked:bg-[#49AE44] checked:border-[#49AE44] transition-colors cursor-pointer hover:border-[#49AE44]/80 hover:checked:bg-[#49AE44]/90"
+                disabled={loading}
+                className="peer appearance-none w-5 h-5 border-2 border-[#49AE44] rounded-md checked:bg-[#49AE44] checked:border-[#49AE44] transition-colors cursor-pointer hover:border-[#49AE44]/80 hover:checked:bg-[#49AE44]/90 disabled:opacity-50 disabled:cursor-not-allowed"
               />
               {/* Tick mark */}
               <svg
@@ -112,11 +213,14 @@ export default function RegisterForm() {
           </label>
         </div>
 
-        <input
+        {/* Submit Button */}
+        <button
           type="submit"
-          value="Create Account"
-          className="w-full py-3 bg-[#49AE44] rounded-lg text-white font-bold cursor-pointer hover:bg-[#3e8e3a] transition-colors duration-200"
-        />
+          disabled={loading}
+          className="w-full py-3 bg-[#49AE44] rounded-lg text-white font-bold cursor-pointer hover:bg-[#3e8e3a] transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-[#49AE44]"
+        >
+          {loading ? "Creating Account..." : "Create Account"}
+        </button>
       </form>
 
       {/* Divider */}
@@ -126,7 +230,11 @@ export default function RegisterForm() {
         <div className="flex-grow border-t border-gray-300"></div>
       </div>
 
-      <button className="w-full border border-[#919EAB]/32 py-3 text-[#637381] flex justify-center items-center gap-4 rounded-lg cursor-pointer hover:border-[#49AE44]/50 hover:text-[#49AE44] transition-all duration-200">
+      <button
+        onClick={handleGoogleRegister}
+        disabled={loading}
+        className="w-full border border-[#919EAB]/32 py-3 text-[#637381] flex justify-center items-center gap-4 rounded-lg cursor-pointer hover:border-[#49AE44]/50 hover:text-[#49AE44] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+      >
         <FcGoogle size={24} />
         Continue with Google
       </button>
@@ -134,8 +242,10 @@ export default function RegisterForm() {
       <p className="mt-8 text-sm text-center">
         Already have an account?{" "}
         <Link
-          href={"/login"}
-          className="text-[#49AE44] font-semibold text-sm hover:text-[#3e8e3a] transition-colors duration-200"
+          href={loading ? "#" : "/login"}
+          className={`text-[#49AE44] font-semibold text-sm hover:text-[#3e8e3a] transition-colors duration-200 ${
+            loading ? "pointer-events-none opacity-50" : ""
+          }`}
         >
           Login
         </Link>

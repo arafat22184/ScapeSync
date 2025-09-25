@@ -15,10 +15,6 @@ export default function VerifyRegistration() {
       <h1 className="text-[#212B36] text-2xl font-bold mb-2">
         Please check your email!
       </h1>
-      <p className="text-[#637381]">
-        We&apos;ve emailed a 6-digit confirmation code to acb@domain, please
-        enter the code in below box to verify your email.
-      </p>
       <RegisterVerifyForm></RegisterVerifyForm>
     </div>
   );
