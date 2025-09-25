@@ -76,7 +76,7 @@ export default function LoginForm() {
             </label>
           </div>
           <Link
-            href={"/forgotPass"}
+            href={"/resetPassword"}
             className="text-[#49AE44] text-sm font-semibold hover:text-[#3e8e3a] transition-colors duration-200"
           >
             Forgot password?
