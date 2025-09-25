@@ -1,6 +1,7 @@
 import Banner from "./components/Home/Banner";
 import FAQS from "./components/Home/FAQS/FAQS";
 import Features from "./components/Home/Features";
+import Footer from "./components/Home/Footer/Footer";
 import Navbar from "./components/Home/Navbar";
 import Reviews from "./components/Home/Reviews/Reviews";
 import UserFocusedFeatures from "./components/Home/UserFocusedFeatures/UserFocusedFeatures";
@@ -18,6 +19,7 @@ export default function Home() {
         <Reviews></Reviews>
         <FAQS></FAQS>
       </main>
+      <Footer></Footer>
     </div>
   );
 }
