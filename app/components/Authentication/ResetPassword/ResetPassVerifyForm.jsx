@@ -79,7 +79,8 @@ export default function ResetPassVerifyForm() {
 
       if (response.ok) {
         toast.success("Code verified successfully!", { id: loadingToast });
-        router.push(`/updatePassword`);
+        sessionStorage.setItem("resetToken", result.data.token);
+        router.push("/updatePassword");
       } else {
         // Clear the codes on error
         setCodes(["", "", "", "", "", ""]);
@@ -194,7 +195,7 @@ export default function ResetPassVerifyForm() {
         <button
           onClick={handleVerify}
           disabled={!allCodesFilled || loading}
-          className="w-full py-3 bg-[#49AE44] text-white font-bold rounded-lg hover:bg-[#3e8e3a] transition-colors duration-200 mb-4 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-[#49AE44] flex items-center justify-center gap-2"
+          className="w-full py-3 bg-[#49AE44] text-white font-bold rounded-lg hover:bg-[#3e8e3a] transition-colors duration-200 mb-4 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer disabled:hover:bg-[#49AE44] flex items-center justify-center gap-2"
         >
           {loading ? (
             <>
@@ -211,7 +212,7 @@ export default function ResetPassVerifyForm() {
           <button
             onClick={handleResendCode}
             disabled={resendLoading || loading}
-            className="text-[#49AE44] font-semibold hover:underline disabled:opacity-50 disabled:cursor-not-allowed"
+            className="text-[#49AE44] font-semibold hover:underline disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
           >
             {resendLoading ? "Sending..." : "Resend code"}
           </button>
