@@ -7,7 +7,7 @@ export default function UserFocusedFeatures() {
   const userFeature = "text-lg text-[#0F172A] font-medium pl-6 border-l-4";
 
   return (
-    <section className="max-w-11/12 lg:max-w-7xl mx-auto mb-42.5 relative">
+    <section className="mb-42.5 relative">
       {/* Arrows */}
       {/* User Arrow */}
       <Image
@@ -155,7 +155,7 @@ export default function UserFocusedFeatures() {
             <p className={badgeClass}>Business Owners</p>
             <h3 className={userTitle}>
               Assign jobs, monitor performance, and
-              <br />
+              <br className="hidden lg:block" />
               streamline operations.
             </h3>
             <p className="text-[#637381] text-lg mb-6">

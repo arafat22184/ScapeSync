@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Banner() {
   return (
-    <section className="max-w-11/12 lg:max-w-7xl mx-auto flex flex-col-reverse lg:flex-row justify-between items-center gap-20 lg:gap-0">
+    <section className="flex flex-col-reverse lg:flex-row justify-between items-center gap-20 lg:gap-0">
       {/* Flare effect */}
       <div className="absolute inset-0 top-10 -left-130 pointer-events-none">
         <div className="absolute w-[600px] h-[600px] bg-[#9DFF99]/40 blur-[90px] rounded-full hidden lg:block"></div>
