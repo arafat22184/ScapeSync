@@ -1,5 +1,6 @@
 import { Public_Sans } from "next/font/google";
 import "../globals.css";
+import RedirectIfLoggedIn from "../components/ProtectedRoute";
 
 const publicSans = Public_Sans({
   variable: "--font-public-sans",
@@ -19,7 +20,7 @@ export default function RootLayout({ children }) {
     <html lang="en" className={publicSans.variable}>
       <body className="antialiased">
         <main className="min-h-[calc(100vh-80px)] mx-auto max-w-7xl flex justify-center items-center">
-          {children}
+          <RedirectIfLoggedIn>{children}</RedirectIfLoggedIn>
         </main>
       </body>
     </html>

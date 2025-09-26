@@ -10,7 +10,7 @@ const handler = NextAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
 
-    // Email/Password via your API
+    // Email/Password via API
     CredentialsProvider({
       name: "Credentials",
       credentials: {
@@ -44,8 +44,8 @@ const handler = NextAuth({
   ],
 
   session: {
-    strategy: "jwt", // Use JWT-based session
-    maxAge: 60 * 60 * 24 * 7, // 7 days
+    strategy: "jwt",
+    maxAge: 60 * 60 * 24 * 7, // 7 days validity
   },
 
   callbacks: {
@@ -67,7 +67,7 @@ const handler = NextAuth({
       session.user.id = token.id;
       session.user.name = token.name;
       session.user.email = token.email;
-      session.accessToken = token.accessToken; // Client can access via useSession()
+      session.accessToken = token.accessToken;
       return session;
     },
   },

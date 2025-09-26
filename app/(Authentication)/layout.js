@@ -1,6 +1,7 @@
 import { Public_Sans } from "next/font/google";
 import "../globals.css";
 import Navbar from "../components/Authentication/Navbar";
+import RedirectIfLoggedIn from "../components/ProtectedRoute";
 
 const publicSans = Public_Sans({
   variable: "--font-public-sans",
@@ -21,7 +22,7 @@ export default function AuthLayout({ children }) {
       <body className="antialiased">
         <Navbar></Navbar>
         <main className="min-h-[calc(100vh-80px)] mx-auto max-w-11/12 py-6 lg:py-0 lg:max-w-7xl flex justify-center items-center">
-          {children}
+          <RedirectIfLoggedIn>{children}</RedirectIfLoggedIn>
         </main>
       </body>
     </html>
