@@ -20,7 +20,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={publicSans.variable}>
       <body className="antialiased">
-        <Toaster position="top-right" expand={true} />
+        <Toaster position="top-right" richColors theme="dark" />
         <ClientSessionProvider>{children}</ClientSessionProvider>
       </body>
     </html>

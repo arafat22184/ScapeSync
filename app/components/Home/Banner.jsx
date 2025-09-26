@@ -140,7 +140,7 @@ export default function Banner() {
               whileTap={buttonTap}
             >
               <Image
-                src="/Apple.png"
+                src="https://res.cloudinary.com/ddckuxsjx/image/upload/v1758852621/Apple_vxaxjk.png"
                 width={22}
                 height={27}
                 alt="Apple Store Logo"
@@ -163,7 +163,7 @@ export default function Banner() {
               whileTap={buttonTap}
             >
               <Image
-                src="/Playstore.png"
+                src="https://res.cloudinary.com/ddckuxsjx/image/upload/v1758749443/Foot-PlayStore_g4a7pb.png"
                 width={22}
                 height={27}
                 alt="Google Play Logo"

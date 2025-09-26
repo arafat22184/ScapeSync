@@ -58,7 +58,7 @@ export default function VerificationPage() {
     const verificationCode = codes.join("");
 
     if (verificationCode.length !== 6) {
-      toast.error("Please enter all 6 digits");
+      toast.info("Please enter all 6 digits");
       return;
     }
 

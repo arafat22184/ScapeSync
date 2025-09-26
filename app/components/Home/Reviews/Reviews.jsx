@@ -155,7 +155,7 @@ export default function Reviews() {
         {/* Navigation Buttons */}
         <button
           onClick={goToPrev}
-          className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-green-300/60 hover:bg-green-300 cursor-pointer p-2 rounded-full shadow-lg z-10 transition-all duration-200"
+          className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-[#3BA334] hover:bg-[#3ba334ea] cursor-pointer p-2 rounded-full shadow-lg z-10 transition-all duration-200 text-white"
           aria-label="Previous reviews"
         >
           <IoIosArrowBack />
@@ -163,7 +163,7 @@ export default function Reviews() {
 
         <button
           onClick={goToNext}
-          className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-green-300/60 hover:bg-green-300 cursor-pointer p-2 rounded-full shadow-lg z-10 transition-all duration-200"
+          className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-[#3BA334] hover:bg-[#3ba334ea] cursor-pointer p-2 rounded-full shadow-lg z-10 transition-all duration-200 text-white"
           aria-label="Next reviews"
         >
           <IoIosArrowForward />
