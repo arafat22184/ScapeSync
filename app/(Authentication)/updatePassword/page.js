@@ -2,7 +2,13 @@ import Link from "next/link";
 import UpdatePasswordForm from "../../components/Authentication/ResetPassword/UpdatePasswrodForm";
 import { IoIosArrowBack } from "react-icons/io";
 
-export default function ResetPassword() {
+export const metadata = {
+  title: "ScapeSync | Update Password",
+  description:
+    "Securely update your ScapeSync account password. Enter a strong, unique password in both fields to confirm your new credentials.",
+};
+
+export default function UpdatePassword() {
   return (
     <div className="max-w-[480px] mx-auto">
       <Link

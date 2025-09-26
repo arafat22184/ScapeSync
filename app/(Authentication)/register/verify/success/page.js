@@ -1,6 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 
+export const metadata = {
+  title: "ScapeSync | Registration Successful",
+  description:
+    "Your ScapeSync account has been successfully verified. You can now log in and start managing jobs, teams, and services effortlessly.",
+};
+
 export default function RegistrationSuccess() {
   return (
     <div>

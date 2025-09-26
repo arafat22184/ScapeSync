@@ -1,4 +1,9 @@
 import RegisterForm from "../../components/Authentication/RegisterForm";
+export const metadata = {
+  title: "ScapeSync | Register",
+  description:
+    "Create your ScapeSync account to simplify job scheduling, manage your team, and stay connected with clients in one place.",
+};
 
 export default function Register() {
   return (

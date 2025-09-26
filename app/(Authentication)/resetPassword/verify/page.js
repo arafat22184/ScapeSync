@@ -2,6 +2,12 @@ import { IoIosArrowBack } from "react-icons/io";
 import Link from "next/link";
 import ResetPassVerifyForm from "../../../components/Authentication/ResetPassword/ResetPassVerifyForm";
 
+export const metadata = {
+  title: "ScapeSync | Verify Password Reset",
+  description:
+    "Enter the verification code sent to your email to securely confirm your password reset request on ScapeSync.",
+};
+
 export default function VerifyResetPass() {
   return (
     <div className="max-w-[480px] mx-auto">

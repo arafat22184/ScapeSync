@@ -1,7 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export default function RegistrationSuccess() {
+export const metadata = {
+  title: "ScapeSync | Password Reset Success",
+  description:
+    "Your ScapeSync account password has been successfully updated. Log in with your new password to continue managing your projects and services securely.",
+};
+
+export default function PasswordUpdateSuccess() {
   return (
     <div className="max-w-[480px] mx-auto">
       <div className="flex justify-center items-center">

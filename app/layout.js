@@ -11,7 +11,7 @@ const publicSans = Public_Sans({
 });
 
 export const metadata = {
-  title: "ScapeSync",
+  title: "ScapeSync | Home",
   description:
     "Built for business owners, employees, and clients streamline job scheduling, service tracking, and team management in one powerful app.",
 };

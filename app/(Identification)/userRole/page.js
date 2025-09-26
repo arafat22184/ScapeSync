@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export default function ResetPassword() {
+export default function UserRole() {
   return (
     <div className="my-6 lg:my-0">
       <nav className="flex items-center justify-center mb-6">

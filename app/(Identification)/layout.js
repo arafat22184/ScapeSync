@@ -10,9 +10,9 @@ const publicSans = Public_Sans({
 });
 
 export const metadata = {
-  title: "ScapeSync",
+  title: "ScapeSync | Identify Yourself",
   description:
-    "Built for business owners, employees, and clients streamline job scheduling, service tracking, and team management in one powerful app.",
+    "Choose your role in ScapeSync to personalize your experience. Whether you're a client or a business owner, get tailored features to meet your needs.",
 };
 
 export default function RootLayout({ children }) {

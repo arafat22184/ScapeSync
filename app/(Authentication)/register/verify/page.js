@@ -2,6 +2,12 @@ import { IoIosArrowBack } from "react-icons/io";
 import RegisterVerifyForm from "../../../components/Authentication/RegisterVerifyForm";
 import Link from "next/link";
 
+export const metadata = {
+  title: "ScapeSync | Verify Registration",
+  description:
+    "Enter the verification code sent to your email to confirm your ScapeSync account and unlock access to all features.",
+};
+
 export default function VerifyRegistration() {
   return (
     <div className="max-w-[480px] mx-auto">

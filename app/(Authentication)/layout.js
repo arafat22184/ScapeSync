@@ -12,9 +12,9 @@ const publicSans = Public_Sans({
 });
 
 export const metadata = {
-  title: "ScapeSync",
+  title: "ScapeSync | Authentication",
   description:
-    "Built for business owners, employees, and clients streamline job scheduling, service tracking, and team management in one powerful app.",
+    "Access your ScapeSync account with secure login, registration, password reset, and account verification. Stay connected with ease and security.",
 };
 
 export default function AuthLayout({ children }) {

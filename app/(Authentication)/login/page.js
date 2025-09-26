@@ -1,5 +1,9 @@
 import LoginForm from "../../components/Authentication/LoginForm";
-
+export const metadata = {
+  title: "ScapeSync | Login",
+  description:
+    "Log in to your ScapeSync account to manage schedules, track services, and stay connected with your team.",
+};
 export default function Login() {
   return (
     <div className="max-w-[480px] mx-auto">
