@@ -39,7 +39,6 @@ export default function LoginForm() {
         email,
         password,
       });
-
       if (!result.error) {
         toast.success("Login successful! Redirecting...", { id: loadingToast });
         router.push("/");

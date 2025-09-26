@@ -35,7 +35,7 @@ const handler = NextAuth({
             id: data.user?.id,
             name: `${data.user?.first_name} ${data.user?.last_name}`,
             email: data.user?.email,
-            token: data.token,
+            accessToken: data.token,
           };
         }
         return null;
@@ -43,17 +43,31 @@ const handler = NextAuth({
     }),
   ],
 
-  session: { strategy: "jwt" },
+  session: {
+    strategy: "jwt", // Use JWT-based session
+    maxAge: 60 * 60 * 24 * 7, // 7 days
+  },
 
   callbacks: {
+    // Store token in JWT
     async jwt({ token, user }) {
-      if (user?.token) {
-        token.accessToken = user.token;
+      if (user?.accessToken) {
+        token.accessToken = user.accessToken;
+      }
+      if (user) {
+        token.id = user.id;
+        token.name = user.name;
+        token.email = user.email;
       }
       return token;
     },
+
+    // Make token available in session
     async session({ session, token }) {
-      session.accessToken = token.accessToken;
+      session.user.id = token.id;
+      session.user.name = token.name;
+      session.user.email = token.email;
+      session.accessToken = token.accessToken; // Client can access via useSession()
       return session;
     },
   },
