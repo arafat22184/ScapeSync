@@ -14,11 +14,6 @@ export default function LoginForm() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  const handlePassShowToogle = (e) => {
-    e.preventDefault();
-    setShowPass(!showPass);
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -116,7 +111,7 @@ export default function LoginForm() {
           />
           <button
             type="button"
-            onClick={handlePassShowToogle}
+            onClick={() => setShowPass(!showPass)}
             disabled={loading}
             className="absolute right-4 top-4 text-[#637381] cursor-pointer hover:text-[#49AE44] transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
           >

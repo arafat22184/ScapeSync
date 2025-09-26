@@ -91,9 +91,9 @@ export default function Navbar() {
               <Image
                 src={session.user.image}
                 alt="Profile"
-                width={36}
-                height={36}
-                className="rounded-full object-cover"
+                width={40}
+                height={40}
+                className="rounded-full object-cover border-2 border-green-500"
               />
             ) : (
               <div className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-300 border-2 border-green-500">
@@ -101,7 +101,9 @@ export default function Navbar() {
               </div>
             )}
             <span className="font-semibold text-gray-800">
-              {!session?.user?.name === "undefined undefined" || userName}
+              {session?.user?.name === "undefined undefined"
+                ? userName
+                : session?.user?.name}
             </span>
           </div>
 

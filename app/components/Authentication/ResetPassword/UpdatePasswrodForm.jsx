@@ -6,6 +6,7 @@ import { toast } from "sonner";
 
 export default function UpdatePasswordForm() {
   const [showPass, setShowPass] = useState(false);
+  const [showVerifyPass, setShowVerifyPass] = useState(false);
   const [token, setToken] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -17,11 +18,6 @@ export default function UpdatePasswordForm() {
       if (storedToken) setToken(storedToken);
     }
   }, []);
-
-  const handlePassShowToggle = (e) => {
-    e.preventDefault();
-    setShowPass(!showPass);
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -123,7 +119,7 @@ export default function UpdatePasswordForm() {
         />
         <button
           type="button"
-          onClick={handlePassShowToggle}
+          onClick={() => setShowPass(!showPass)}
           disabled={loading}
           className="absolute right-4 top-4 text-[#637381] cursor-pointer hover:text-[#49AE44] transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
         >
@@ -134,7 +130,7 @@ export default function UpdatePasswordForm() {
       {/* Confirm Password */}
       <div className="relative">
         <input
-          type={showPass ? "text" : "password"}
+          type={showVerifyPass ? "text" : "password"}
           name="confirmPassword"
           placeholder="Confirm New Password"
           autoComplete="new-password"
@@ -144,11 +140,11 @@ export default function UpdatePasswordForm() {
         />
         <button
           type="button"
-          onClick={handlePassShowToggle}
+          onClick={() => setShowVerifyPass(!showVerifyPass)}
           disabled={loading}
           className="absolute right-4 top-4 text-[#637381] cursor-pointer hover:text-[#49AE44] transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          {showPass ? <IoIosEye size={24} /> : <IoMdEyeOff size={24} />}
+          {showVerifyPass ? <IoIosEye size={24} /> : <IoMdEyeOff size={24} />}
         </button>
       </div>
 

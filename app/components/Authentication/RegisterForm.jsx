@@ -9,14 +9,10 @@ import { toast } from "sonner";
 
 export default function RegisterForm() {
   const [showPass, setShowPass] = useState(false);
+  const [showVerifyPass, setShowVerifyPass] = useState(false);
   const [formLoading, setFormLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
   const router = useRouter();
-
-  const handlePassShowToogle = (e) => {
-    e.preventDefault();
-    setShowPass(!showPass);
-  };
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -169,7 +165,8 @@ export default function RegisterForm() {
             className="outline-1 outline-[#919EAB]/32 w-full h-14 rounded-lg pl-4 focus:outline-[#49AE44] hover:outline-[#49AE44]/50 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
           />
           <button
-            onClick={handlePassShowToogle}
+            type="button"
+            onClick={() => setShowPass(!showPass)}
             disabled={isLoading}
             className="absolute right-4 top-4 text-[#637381] cursor-pointer hover:text-[#49AE44] transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
           >
@@ -180,7 +177,7 @@ export default function RegisterForm() {
         {/* Confirm Password */}
         <div className="relative">
           <input
-            type={showPass ? "text" : "password"}
+            type={showVerifyPass ? "text" : "password"}
             name="confirmPassword"
             placeholder="Confirm Password"
             autoComplete="true"
@@ -189,11 +186,12 @@ export default function RegisterForm() {
             className="outline-1 outline-[#919EAB]/32 w-full h-14 rounded-lg pl-4 focus:outline-[#49AE44] hover:outline-[#49AE44]/50 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
           />
           <button
-            onClick={handlePassShowToogle}
+            type="button"
+            onClick={() => setShowVerifyPass(!showVerifyPass)}
             disabled={isLoading}
             className="absolute right-4 top-4 text-[#637381] cursor-pointer hover:text-[#49AE44] transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {showPass ? <IoIosEye size={24} /> : <IoMdEyeOff size={24} />}
+            {showVerifyPass ? <IoIosEye size={24} /> : <IoMdEyeOff size={24} />}
           </button>
         </div>
 
